@@ -57,23 +57,23 @@ class BackupApp:
     def create_backup(self):
         """Основная логика копирования"""
         source = self.source_dir.get()
-        backup_root = self.backup_roo.get()
+        backup_root = self.backup_root.get()
 
         if not source or not backup_root:
             messagebox.showerror("Ошибка", "Выберите обе папки!")
             return
 
-        today = datetime.now().strftime("%D-%M-%Y")
+        today = datetime.now().strftime("%Y-%m-%d")
         backup_folder = os.path.join(backup_root, f"backup_{today}")
 
         try:
             os.makedirs(backup_folder, exist_ok=True)
             shutil.copytree(
                 source, 
-                os.path.join(backup_folder. os.path.basename(source)),
+                os.path.join(backup_folder, os.path.basename(source)),
                 dirs_exist_ok=True    
             )
-            self.status_label.config(text=f"✅ Успешно сохранено в:\n{backup_folder}", foregroud="green")
+            self.status_label.config(text=f"✅ Успешно сохранено в:\n{backup_folder}", foreground="green")
         except Exception as e:
             self.status_label.config(text=f"❌ Ошибка: {e}", foreground="red")
             messagebox.showerror("Ошибка", str(e))
