@@ -2,10 +2,10 @@
 block_cipher = None
 
 a = Analysis(
-    ['backup_gui.py'],
-    pathex=[],
+    ['main.py'],
+    pathex=['.'],
     binaries=[],
-    datas=[],
+    datas=[('assets/*', 'assets')],
     hiddenimports=[],
     hookspath=[],
     hooksconfig={},
@@ -33,5 +33,5 @@ exe = EXE(
     upx_exclude=[],
     runtime_tmpdir=None,
     console=False,
-    icon='icon.ico'
+    icon='assets/icon.ico'
 )
