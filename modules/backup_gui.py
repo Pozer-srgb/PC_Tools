@@ -10,6 +10,8 @@ class BackupApp:
         self.parent = parent
         self.root = ttk.Frame(self.parent)
         self.root.pack(fill="both", expand=True)
+        self.progress = ttk.Progressbar(self.root, mode="indeterminate")
+        self.progress.pack(pady=5)
 
         # Стили
         self.style = ttk.Style()
@@ -72,6 +74,8 @@ class BackupApp:
 
         try:
             os.makedirs(backup_folder, exist_ok=True)
+
+            self.progress.start()
             
             # Создание ZIP-архив
             with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -81,7 +85,15 @@ class BackupApp:
                         arcname = os.path.relpath(file_path, source)
                         zipf.write(file_path, arcname)
             
+            self.progress.stop()
+            
             self.status_label.config(text=f"✅  Архив создан: {zip_filename}", foreground="green")
         except Exception as e:
+            self.progress.stop()
             self.status_label.config(text=f"❌ Ошибка: {e}", foreground="red")
             messagebox.showerror("Ошибка", str(e))
+    
+    # Фильр
+    def should_include(self, file_path):
+        exclude_extensions = [".tmp", ".log"]
+        return not any(file_path.endswith(ext) for ext in exclude_extensions)
