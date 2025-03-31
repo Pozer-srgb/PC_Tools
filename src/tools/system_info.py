@@ -10,10 +10,12 @@ def setup_tool(app):
         Процессор: 
         - Загружен: {psutil.cpu_percent()}%
         - Ядра: {psutil.cpu_count()}
+        - Температура: N/A
 
         Память: 
         - Использовано: {psutil.virtual_memory().percent}%
         - Всего: {round(psutil.virtual_memory().total / (1024**3), 1)} GB
+        - Свободно: {round(psutil.virtual_memory().available / (1024**3), 1)} GB
         """
         messagebox.showinfo("Системная информация", info)
 

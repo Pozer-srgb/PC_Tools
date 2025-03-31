@@ -6,7 +6,7 @@ import customtkinter as ctk
 def setup_tool(app):
     """Кнопка для очистки корзины (только Windows)"""
     def clean_trash():
-        answer = messagebox.askyesno("Подтверждение", "Очистить корзину?")
+        answer = messagebox.askyesno("Подтверждение", "Очистить корзину? Это нельязя отменить!")
         if not answer:
             return
         try:

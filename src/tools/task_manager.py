@@ -9,7 +9,10 @@ def setup_tool(app):
         if os.name != 'nt':
             messagebox.showerror("Ошибка", "Только для Windows!")
             return
-        os.system("taskmgr")
+        try:
+            os.system("taskmgr")
+        except Exception as e:
+            messagebox.showerror("Ошибка", f"Не удалось открыть: {str(e)}")
 
     return ctk.CTkButton(
         app, 
