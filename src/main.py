@@ -1,13 +1,14 @@
+import sys
+import os
 import customtkinter as ctk
-from tools.task_manager import setup_tool as setup_taskmgr
-from tools.system_info import setup_tool as setup_sysinfo
-from tools.trash_cleaner import setup_tool as setup_trash_cleaner
+import importlib
+from pathlib import Path
 
 class App(ctk.CTk):
     def __init__(self):
         super().__init__()
         # Настройки окна
-        self.title("PC Tools v1.0")
+        self.title("PC Tools v1.0.1")
         self.geometry("600x400")
         ctk.set_appearance_mode("Dark")
         ctk.set_default_color_theme("blue")
@@ -16,15 +17,20 @@ class App(ctk.CTk):
         self.load_tools()
 
     def load_tools(self):
-        # Список всех модулей
-        tools = [
-            setup_taskmgr,
-            setup_sysinfo,
-            setup_trash_cleaner
-        ]
+        modules = []
+        # Ищем все .py файлы в папке tools (кроме __init__.py)
+        for file in Path("tools").glob("*.py"):
+            if file.name == "__init__.py":
+                continue
+            module_name = file.stem
+            try:
+                module = importlib.import_module(f"tools.{module_name}")
+                modules.append(module.setup_tool)
+            except Exception as e:
+                print(f"Ошибка: {e}")
 
         # Создаём кнопки для каждого модуля
-        for tool in tools:
+        for tool in modules:
             button = tool(self)
             button.pack(pady=10)
 
