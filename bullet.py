@@ -5,8 +5,7 @@ class Bullet(pygame.sprite.Sprite):
     def __init__(self, x, y):
         super().__init__()
         # Поверхность для пули (маленький красный прямоугольник)
-        self.image = pygame.Surface((5, 10))
-        self.image.fill((255, 0, 0))
+        self.image = pygame.image.load("assets/laser.png")
         self.rect = self.image.get_rect(center=(x, y))
         self.speed = BULLET_SPEED
 
