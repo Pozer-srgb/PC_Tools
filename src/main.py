@@ -153,7 +153,9 @@ while init_data['game_state']['running']:
     game_objects['all_sprites'].draw(screen)
     draw_score(screen, game_state['score'], font)
     draw_lives(screen, game_state['lives'], font)
-    draw_level(screen, level_manager.current_level, font)
+
+    progress = level_manager.calculate_progress(game_state['score'])
+    draw_level(screen, level_manager.current_level, progress, font)
 
     if game_state['paused']:
         pause_text = font.render("ПАУЗА", True, WHITE)

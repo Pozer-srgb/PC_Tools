@@ -38,3 +38,10 @@ class LevelManager:
                       self.current_level += 1
                       return True
             return False
+    
+    def calculate_progress(self, current_score):
+        config = self.get_current_level_config()
+        if self.current_level >= len(self.levels):
+             return 1.0
+        progress = current_score / config['score_threshold']
+        return min(progress, 1.0)

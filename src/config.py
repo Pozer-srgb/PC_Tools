@@ -24,4 +24,10 @@ SOUND_SHOOT = "../assets/shoot.wav"                                             
 MUSIC_PATH = "../assets/background_music.ogg"                                                               # Фоновая музыка
 
 # Изображения
-EXPLOSION_FRAMES = ["../assets/explosion_1.png", "../assets/explosion_2.png", "../assets/explosion_3.png"]           # Фрэймы взрыва
+EXPLOSION_FRAMES = ["../assets/explosion_1.png", "../assets/explosion_2.png", "../assets/explosion_3.png"]  # Фрэймы взрыва
+
+# Прогресс-бар
+PROGRESS_BAR_WIDTH = 200                                                                                    # Ширина прогресс-бара
+PROGRESS_BAR_HEIGHT = 20                                                                                    # Высота прогресс-бара
+PROGRESS_BAR_BG_COLOR = (50, 50, 50)                                                                        # Цвет фона полосы
+PROGRESS_BAR_FG_COLOR = (0, 255, 0)                                                                         # Цвет заполнения полосы
