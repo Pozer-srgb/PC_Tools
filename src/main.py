@@ -1,5 +1,5 @@
 import pygame
-from config import WIDTH, HEIGHT, FPS, BLACK, WHITE, PLAYER_LIVES, MUSIC_PATH, SOUND_SHOOT
+from config import WIDTH, HEIGHT, FPS, BLACK, WHITE, PLAYER_LIVES, MUSIC_PATH, SOUND_SHOOT, PROGRESS_ANIMATION_SPEED
 from player import Player
 from bullet import Bullet, Explosion
 from enemy import Enemy
@@ -154,8 +154,11 @@ while init_data['game_state']['running']:
     draw_score(screen, game_state['score'], font)
     draw_lives(screen, game_state['lives'], font)
 
-    progress = level_manager.calculate_progress(game_state['score'])
-    draw_level(screen, level_manager.current_level, progress, font)
+    target_progress = level_manager.calculate_progress(game_state['score'])
+    current_progress = getattr(level_manager, 'current_progress', target_progress)
+    current_progress += (target_progress - current_progress) * PROGRESS_ANIMATION_SPEED
+    level_manager.current_progress = current_progress
+    draw_level(screen, level_manager.current_level, current_progress, font)
 
     if game_state['paused']:
         pause_text = font.render("ПАУЗА", True, WHITE)

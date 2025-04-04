@@ -31,3 +31,6 @@ PROGRESS_BAR_WIDTH = 200                                                        
 PROGRESS_BAR_HEIGHT = 20                                                                                    # Высота прогресс-бара
 PROGRESS_BAR_BG_COLOR = (50, 50, 50)                                                                        # Цвет фона полосы
 PROGRESS_BAR_FG_COLOR = (0, 255, 0)                                                                         # Цвет заполнения полосы
+PROGRESS_BAR_BORDER_COLOR = (200, 200, 200)                                                                 # Цвет рамки
+PROGRESS_BAR_BORDER_WIDTH = 2                                                                               # Толщина рамки
+PROGRESS_ANIMATION_SPEED = 0.1                                                                              # Скорость анимации (0.1 = плавно)
