@@ -1,6 +1,7 @@
 class LevelManager:
     def __init__(self):
         self.current_level = 1
+        self.accumulated_score = 0
         self.levels = {
             1: {
                 'enemy_speed_range': (2, 5),
@@ -33,15 +34,18 @@ class LevelManager:
 
     def check_level_up(self, score):
             config = self.get_current_level_config()
-            if score >= config['score_threshold']:
-                 if self.current_level < len(self.levels):
-                      self.current_level += 1
-                      return True
+            currebt_threshold = self.accumulated_score + config['score_threshold']
+
+            if score >= currebt_threshold and self.current_level < len(self.levels):
+                self.accumulated_score += config['score_threshold']
+                self.current_level += 1
+                return True
             return False
     
     def calculate_progress(self, current_score):
-        config = self.get_current_level_config()
-        if self.current_level >= len(self.levels):
+        if self.current_level > len(self.levels):
              return 1.0
-        progress = current_score / config['score_threshold']
-        return min(progress, 1.0)
+        config = self.get_current_level_config()
+        required = config['score_threshold']
+        progress = (current_score - self.accumulated_score) / required
+        return max(0.0, min(progress, 1.0))
