@@ -34,16 +34,16 @@ class LevelManager:
 
     def check_level_up(self, score):
             config = self.get_current_level_config()
-            currebt_threshold = self.accumulated_score + config['score_threshold']
+            current_threshold = self.accumulated_score + config['score_threshold']
 
-            if score >= currebt_threshold and self.current_level < len(self.levels):
+            if score >= current_threshold and self.current_level < len(self.levels):
                 self.accumulated_score += config['score_threshold']
                 self.current_level += 1
                 return True
             return False
     
     def calculate_progress(self, current_score):
-        if self.current_level > len(self.levels):
+        if self.current_level >= len(self.levels):
              return 1.0
         config = self.get_current_level_config()
         required = config['score_threshold']
